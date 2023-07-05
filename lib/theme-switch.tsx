@@ -16,10 +16,13 @@ export function ModeToggle() {
 
   // I don't know how it's working but somehow it's working🙂
   const { theme, setTheme } = useTheme()
+  const [localTheme, setLocalTheme] = React.useState("system")
 
-  console.log(theme)
+  React.useEffect(() => {
+    let themeFromLocalStorage: any = localStorage.getItem("theme")
+    setLocalTheme(themeFromLocalStorage)
+  }, [])
 
-  let localTheme = localStorage.getItem('theme')
 
   return (
     <DropdownMenu>
