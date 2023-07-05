@@ -18,10 +18,15 @@ export function ModeToggle() {
   const { theme, setTheme } = useTheme()
   const [localTheme, setLocalTheme] = React.useState("system")
 
-  React.useEffect(() => {
+  const handleThemeChange = () => {
     let themeFromLocalStorage: any = localStorage.getItem("theme")
     setLocalTheme(themeFromLocalStorage)
-  }, [])
+  }
+
+  React.useEffect(() => {
+    handleThemeChange()
+    // window.location.reload()
+  }, [localTheme])
 
 
   return (
@@ -29,10 +34,10 @@ export function ModeToggle() {
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
           {
-             localTheme === "dark" ?
-              <Moon color="black" className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            localTheme === "dark" ?
+              <Moon onChange={handleThemeChange} color="black" className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               :
-              <Sun color="black" className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 " />
+              <Sun onChange={handleThemeChange} color="black" className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 " />
           }
 
 
